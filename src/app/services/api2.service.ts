@@ -8,7 +8,7 @@ import { Task } from "../model/task";
 })
 export class Api2Service {
 
-  private readonly API_URL = 'https://6229de55be12fc4538aa6c8e.mockapi.io/task';
+  private readonly API_URL = 'https://623436dd6d5465eaa51607ba.mockapi.io/task';
 
   public activeTasks$ = new BehaviorSubject<Task[]>([]);
   public doneTasks$ = new BehaviorSubject<Task[]>([]);
@@ -21,7 +21,7 @@ export class Api2Service {
 
 
   getActiveTasks(){
-    this.http.get<any[]>(this.API_URL + "?doneDate=Undefined").pipe(
+    this.http.get<any[]>(this.API_URL + "?doneDate=null").pipe(
       // map(tasks => tasks.filter(t => t.doneDate === undefined)),
       map(tasks => tasks.map(t => this.parseTask(t)))
     ).subscribe(tasks => this.activeTasks$.next(tasks))
@@ -40,8 +40,8 @@ export class Api2Service {
   }
 
   getDoneTasks(){
-    this.http.get<any[]>(this.API_URL).pipe(
-      map(tasks => tasks.filter(t => t.doneDate !== undefined)),
+    this.http.get<Task[]>(this.API_URL).pipe(
+      map(tasks => tasks.filter(t => t.doneDate !== null)),
       map(tasks => tasks.map(t => this.parseTask(t)))
     ).subscribe(tasks => this.doneTasks$.next(tasks))
   }
