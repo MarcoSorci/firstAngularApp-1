@@ -1,3 +1,12 @@
 <div class="container">
-
+<h2>Stats</h2>
+<mat-list class="list" role="list">
+    <mat-list-item role="listitem">Active totali: {{activeCount}}</mat-list-item>
+    <mat-list-item role="listitem">Done totali: {{doneCount}}</mat-list-item>
+    <mat-list-item role="listitem"*ngIf="recentActive">Last active: {{recentActive.name}}</mat-list-item>
+    <mat-list-item role="listitem"*ngIf="recentDone">Last done: {{recentDone.name}}</mat-list-item>
+  </mat-list>
 </div>
+
+
+<!-- total to do, total done, last to do, last done -->
