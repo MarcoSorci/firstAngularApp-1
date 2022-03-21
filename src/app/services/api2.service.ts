@@ -7,7 +7,8 @@ import { Task } from '../model/task';
   providedIn: 'root',
 })
 export class Api2Service {
-  private readonly API_URL = 'https://623436dd6d5465eaa51607ba.mockapi.io/task';
+  private readonly API_URL =
+    'https://623436dd6d5465eaa51607ba.mockapi.io/task/';
 
   public activeTasks$ = new BehaviorSubject<Task[]>([]);
   public doneTasks$ = new BehaviorSubject<Task[]>([]);
@@ -17,11 +18,15 @@ export class Api2Service {
     this.getDoneTasks();
   }
 
-  getActiveTasks() {
+  getActiveTasks(filter?: string) {
+    let filterParam = '';
+    if (filter) {
+      filterParam = '?search=' + filter;
+    }
     this.http
-      .get<any[]>(this.API_URL + '?doneDate=null')
+      .get<any[]>(this.API_URL + filterParam)
       .pipe(
-        // map(tasks => tasks.filter(t => t.doneDate === undefined)),
+        map(tasks => tasks.filter(t => t.doneDate === null)),
         map((tasks) => tasks.map((t) => this.parseTask(t)))
       )
       .subscribe((tasks) => this.activeTasks$.next(tasks));
@@ -39,9 +44,13 @@ export class Api2Service {
     this.activeTasks$.next(activeArray);
   }
 
-  getDoneTasks() {
+  getDoneTasks(filter?: string) {
+    let filterParam = '';
+    if (filter) {
+      filterParam = '?search=' + filter;
+    }
     this.http
-      .get<Task[]>(this.API_URL)
+      .get<Task[]>(this.API_URL + filterParam)
       .pipe(
         map((tasks) => tasks.filter((t) => t.doneDate !== null)),
         map((tasks) => tasks.map((t) => this.parseTask(t)))
@@ -114,33 +123,28 @@ export class Api2Service {
   }
 
   recentActive(): Observable<Task | undefined> {
-    return this.activeTasks$.pipe(
-      map((arr) => this.checkData(arr))
-    );
+    return this.activeTasks$.pipe(map((arr) => this.checkData(arr)));
   }
 
   recentDone(): Observable<Task | undefined> {
-    return this.doneTasks$.pipe(
-      map((arr) => this.checkData(arr))
-    );
+    return this.doneTasks$.pipe(map((arr) => this.checkData(arr)));
   }
 
-  checkData(arr: Task[]):Task | undefined {
-    if(arr.length > 0){
-      let currentTask: Task = arr[0];    
-    let currentDate: number = arr[0].creationDate.getTime();
+  checkData(arr: Task[]): Task | undefined {
+    if (arr.length > 0) {
+      let currentTask: Task = arr[0];
+      let currentDate: number = arr[0].creationDate.getTime();
 
-    for (let i = 1; i < arr.length; i++) {
-      const el = arr[i];
-      if (el.creationDate.getTime() > currentDate) {
-        currentDate = el.creationDate.getTime();
-        currentTask = el;
+      for (let i = 1; i < arr.length; i++) {
+        const el = arr[i];
+        if (el.creationDate.getTime() > currentDate) {
+          currentDate = el.creationDate.getTime();
+          currentTask = el;
+        }
       }
-    } return currentTask
-    } else{
-      return undefined
-      
+      return currentTask;
+    } else {
+      return undefined;
     }
-    
   }
 }

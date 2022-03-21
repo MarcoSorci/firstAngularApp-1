@@ -8,7 +8,7 @@ import { Task } from "../model/task";
 })
 export class ApiService {
 
-  private readonly API_URL = 'https://623436dd6d5465eaa51607ba.mockapi.io/task';
+  private readonly API_URL = 'https://623436dd6d5465eaa51607ba.mockapi.io/task/';
 
   public allTasks$ = new BehaviorSubject<Task[]>([]);
 

@@ -2,12 +2,12 @@
 <h2>Filter</h2>
 <mat-form-field class="example-form-field" appearance="fill">
     <mat-label>Search</mat-label>
-    <input matInput type="text" [(ngModel)]="value">
-    <button *ngIf="value" matSuffix mat-icon-button (click)="value=''">
+    <input matInput type="text" [(ngModel)]="searchString">
+    <button matSuffix mat-icon-button (click)="findTasks()">
       <mat-icon>close</mat-icon>
     </button>
   </mat-form-field>
-  <button *ngIf="value" matSuffix mat-icon-button (click)="value=''">
+  <button matSuffix mat-icon-button (click)="findTasks()">
     <mat-icon>search</mat-icon>
   </button>
   

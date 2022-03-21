@@ -11,9 +11,7 @@ export class StatisticsComponent implements OnInit {
 
   public activeCount: number = 0;
   public doneCount: number = 0;
-  // public recentActive: Task = new Task('','',0);
   public recentActive?: Task;
-  // public recentDone: Task = new Task('','',0);
   public recentDone?: Task;
 
   constructor(private apiS: Api2Service) {}
