@@ -3,7 +3,7 @@ export class Task {
   name: string;
   comment?: string;
 
-  tag?: string[];
+  tags?: string[];
 
   creationDate: Date;
   doneDate?: Date | null;
@@ -45,6 +45,9 @@ export class Task {
     } else {
       dbObject.doneDate = null;
     }
+    if (this.tags&&this.tags.length>0) {
+      dbObject.tags = this.tags
+    }
     return dbObject
   }
 
@@ -52,7 +55,7 @@ export class Task {
     return parseInt(fullNumber.toString().slice(-1));
   }
 
-  static createFromJsonObj(obj: any){
+  static createFromJsonObj(obj:   any){
     const task = new Task(obj.id, obj.name, obj.priority, obj.creationDate);
     if (obj.doneDate) {
       task.doneDate = new Date(obj.doneDate);
