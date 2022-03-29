@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Task } from 'src/app/model/task';
 
 import { Api2Service } from 'src/app/services/api2.service';
@@ -10,7 +10,7 @@ import { Api2Service } from 'src/app/services/api2.service';
 })
 export class TaskInputComponent {
   public taskModel = { name: '', priority: 0 };
-
+// eslint-disable-next-line no-unused-vars
   constructor(private apiS: Api2Service) {}
 
   saveTask() {
@@ -19,7 +19,7 @@ export class TaskInputComponent {
       next: (task) => {
         this.apiS.addActiveTask(task);
       },
-      error: (err) => {},
+      error: () => {},
     });
   }
 }

@@ -22,6 +22,7 @@ export class ToDoListComponent implements OnInit, OnChanges {
   taskList: Task[] = [];
   selectedTask?: Task;
 
+  // eslint-disable-next-line no-unused-vars
   constructor(private api2S: Api2Service) {
     this.doneEvent = new EventEmitter<Task>();
   }
@@ -32,9 +33,9 @@ export class ToDoListComponent implements OnInit, OnChanges {
 
   checkIfIsRecent(task: Task) {
     const now = new Date();
-    const nowTimeStamp = now.getTime();
+ now.getTime();
     const taskDate = task.creationDate;
-    const taskDateTimestamp=taskDate.getTime()
+taskDate.getTime();
   }
 
   ngOnInit(): void {
@@ -45,8 +46,8 @@ export class ToDoListComponent implements OnInit, OnChanges {
     this.api2S.removeActiveTask(task);
     this.api2S.addDoneTask(task);
     this.api2S.completeTask(task).subscribe({
-      next: (task) => {},
-      error: (err) => {
+      next: () => {},
+      error: () => {
         this.api2S.addActiveTask(task);
         this.api2S.removeDoneTask(task);
       },

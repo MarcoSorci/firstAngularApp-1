@@ -9,6 +9,7 @@ import { Api2Service } from 'src/app/services/api2.service';
 export class FilterComponent {
   public searchString = '';
 
+  // eslint-disable-next-line no-unused-vars
   constructor(private api2S: Api2Service) {}
 
   findTasks() {

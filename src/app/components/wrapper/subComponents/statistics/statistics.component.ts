@@ -13,7 +13,7 @@ export class StatisticsComponent implements OnInit {
   public doneCount: number = 0;
   public recentActive?: Task;
   public recentDone?: Task;
-
+// eslint-disable-next-line no-unused-vars
   constructor(private apiS: Api2Service) {}
 
   ngOnInit(): void {

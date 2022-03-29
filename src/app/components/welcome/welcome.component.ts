@@ -15,7 +15,7 @@ export class WelcomeComponent implements OnInit, OnDestroy, OnChanges {
   }
  
   ngOnChanges(changes: SimpleChanges): void {
-      console.log('on changes');
+      console.log('on changes' + changes);
       
   }
   

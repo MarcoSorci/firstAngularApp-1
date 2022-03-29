@@ -10,6 +10,7 @@ import { Api2Service } from 'src/app/services/api2.service';
 export class DoneListComponent implements OnInit {
   doneList: Task[] = [];
 
+  // eslint-disable-next-line no-unused-vars
   constructor(private api2S: Api2Service) {}
 
   ngOnInit(): void {
@@ -19,8 +20,8 @@ export class DoneListComponent implements OnInit {
   taskDelete(task: Task){
     this.api2S.removeDoneTask(task);
     this.api2S.deleteTask(task.id).subscribe({
-      next: task => {},
-      error: err => {
+      next: () => {},
+      error: () => {
         this.api2S.addDoneTask(task);
       }
     });

@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, catchError, first, map, Observable, of } from 'rxjs';
+import { BehaviorSubject, map, Observable } from 'rxjs';
 import { Task } from '../model/task';
 
 @Injectable({
@@ -12,7 +12,7 @@ export class Api2Service {
 
   public activeTasks$ = new BehaviorSubject<Task[]>([]);
   public doneTasks$ = new BehaviorSubject<Task[]>([]);
-
+// eslint-disable-next-line no-unused-vars
   constructor(private http: HttpClient) {
     this.getActiveTasks();
     this.getDoneTasks();
